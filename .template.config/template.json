@@ -1,0 +1,8 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Bismarck Franco Hoyos",
+    "classifications": [ "Project", "Web",".Net Core","Angular" ],
+    "identity": "BFH.Project.Web.NetCore.Angular.Repository.CSharp",
+    "name": "NetCore.Angular.Repository.fbfranco",
+    "shortName": "NetCore.Angular"
+}
