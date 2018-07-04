@@ -18,4 +18,8 @@
     <Folder Include="Test\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SAIP_MED.DATA\SAIP_MED.DATA.csproj" />
+  </ItemGroup>
+
 </Project>
