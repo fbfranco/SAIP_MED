@@ -6,8 +6,8 @@ namespace SAIP_MED.DATA.Config
     public class AppDbContext: DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            //optionsBuilder.UseSqlServer(@"Data Source=BISMARCK-PC\SQLEXPRESS;Initial Catalog=SAIP_MED_DB;Integrated Security=True");
-            optionsBuilder.UseSqlServer(@"Data Source=(local);Initial Catalog=SAIP_MED_DB;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=BISMARCK-PC\SQLEXPRESS;Initial Catalog=SAIP_MED_DB;Integrated Security=True");
+            //optionsBuilder.UseSqlServer(@"Data Source=(local);Initial Catalog=SAIP_MED_DB;Integrated Security=True");
         }
         
         public DbSet<Paciente> Paciente { get; set; }
@@ -76,6 +76,7 @@ namespace SAIP_MED.DATA.Config
             #endregion
             #region Tabla Especialidad
             modelBuilder.Entity<Especialidad>().HasKey(x => x.IdEspecialidad);
+            modelBuilder.Entity<Especialidad>().HasIndex(x => x.NombreEspecialidad).IsUnique();
             modelBuilder.Entity<Especialidad>().Property(x => x.NombreEspecialidad).HasMaxLength(30).IsRequired();
             modelBuilder.Entity<Especialidad>().Property(x => x.Estado).IsRequired();
             #endregion
