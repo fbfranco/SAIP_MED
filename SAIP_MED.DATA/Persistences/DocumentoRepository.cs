@@ -36,7 +36,8 @@ namespace SAIP_MED.DATA.Persistences
             {
                 try
                 {
-                    Context.Documento.Remove(delete);
+                    delete.Estado = 0;
+                    Context.Entry(delete).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Documento se eliminó correctamente.";
 
@@ -64,14 +65,13 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<string> Update(int id, Documento document)
+        public async Task<string> Update(Documento document)
         {
-            var update = await GetDocumentById(id);
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(update).State = EntityState.Modified;
+                    Context.Entry(document).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Documento se actualizó correctamente.";
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SAIP_MED.CORE.Models;
@@ -31,8 +32,32 @@ namespace SAIP_MED.TEST.Test
         {
             Documento.NombreDocumento = "CI";
             var Result = await Repository.Create(Documento);
-            Assert.AreEqual("El Documento se guardó correctamente.",Result, Result);
-            System.Console.Write(Result);
+            Assert.AreEqual("El Documento se guardó correctamente.",Result);
         } 
+
+        [TestMethod]
+        public async Task UpdateDocumentTest()
+        {
+            using (Context = new AppDbContext())
+            {
+                Documento.IdDocumento = Context.Documento.OrderByDescending(x => x.IdDocumento).First().IdDocumento;
+                Documento.NombreDocumento = "CI Modificado";
+            }
+
+            var Result = await Repository.Update(Documento);
+            Assert.AreEqual("El Documento se actualizó correctamente.", Result);
+        }
+
+        [TestMethod]
+        public async Task DeleteDocumentTest()
+        {
+            using (Context = new AppDbContext())
+            {
+                Documento.IdDocumento = Context.Documento.OrderByDescending(x => x.IdDocumento).First().IdDocumento;
+            }
+
+            var Result = await Repository.Delete(Documento.IdDocumento);
+            Assert.AreEqual("El Documento se eliminó correctamente.", Result);
+        }
     }
 }

@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAIP_MED.DATA", "SAIP_MED.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAIP_MED.TEST", "SAIP_MED.TEST\SAIP_MED.TEST.csproj", "{05377FAD-E636-46B9-909E-0C0931F083A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{51D220E1-D555-475A-8A73-A2CD848EAA12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{05377FAD-E636-46B9-909E-0C0931F083A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05377FAD-E636-46B9-909E-0C0931F083A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05377FAD-E636-46B9-909E-0C0931F083A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51D220E1-D555-475A-8A73-A2CD848EAA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51D220E1-D555-475A-8A73-A2CD848EAA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51D220E1-D555-475A-8A73-A2CD848EAA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51D220E1-D555-475A-8A73-A2CD848EAA12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
