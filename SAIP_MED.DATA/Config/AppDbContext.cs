@@ -93,6 +93,7 @@ namespace SAIP_MED.DATA.Config
             #endregion
             #region Tabla CentroRef
             modelBuilder.Entity<CentroRef>().HasKey(x => x.IdCentroRef);
+            modelBuilder.Entity<CentroRef>().HasIndex(x => x.NombreCentro).IsUnique();
             modelBuilder.Entity<CentroRef>().Property(x => x.NombreCentro).HasMaxLength(30).IsRequired();
             modelBuilder.Entity<CentroRef>().Property(x => x.Telefono).HasMaxLength(20);
             modelBuilder.Entity<CentroRef>().Property(x => x.Estado).IsRequired();

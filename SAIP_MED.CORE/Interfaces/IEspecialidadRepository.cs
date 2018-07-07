@@ -9,7 +9,7 @@ namespace SAIP_MED.CORE.Interfaces
         Task<string> Create(Especialidad especialidad);
         Task<string> Update(Especialidad especialidad);
         Task<string> Delete(int id);
-        Task<IEnumerable>  GetEspecialidades();
+        Task<IEnumerable> GetEspecialidades();
         Task<Especialidad> GetEspecialidadById(int id);
     }
 }
