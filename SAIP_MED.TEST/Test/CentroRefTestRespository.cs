@@ -31,6 +31,7 @@ namespace SAIP_MED.TEST.Test
         public async Task CreateCentroTest()
         {
             CentroRef.NombreCentro = "Hospital Hernandez Vera";
+            CentroRef.Telefono = "76666323";
             var Result = await Repository.Create(CentroRef);
             Assert.AreEqual("El Centro se guardó correctamente.",Result);
         } 
@@ -40,7 +41,6 @@ namespace SAIP_MED.TEST.Test
         {
             CentroRef.IdCentroRef = Context.CentroRef.OrderByDescending(x => x.IdCentroRef).First().IdCentroRef;
             CentroRef.NombreCentro = "Hospital Hernandez Vera Modificado";
-            
             var Result = await Repository.Update(CentroRef);
             Assert.AreEqual("El Centro se actualizó correctamente.", Result);
         }

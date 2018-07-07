@@ -31,6 +31,14 @@ namespace SAIP_MED.TEST.Test
         public async Task CreateEmpleadoTest()
         {
             Empleado.Nombre = "Bismarck";
+            Empleado.Apellidos = "Franco Hoyos";
+            Empleado.IdDocumento = 1;
+            Empleado.NroDocumento = "5323182 SC";
+            Empleado.Telefono = "69101806";
+            Empleado.Direccion = "Villa 1ro de Mayo C/14 G";
+            Empleado.Email = "fbfranco@gmail.com";
+            Empleado.Cargo = "Developer";
+
             var Result = await Repository.Create(Empleado);
             Assert.AreEqual("El Empleado se guardó correctamente.",Result);
         } 
@@ -39,7 +47,7 @@ namespace SAIP_MED.TEST.Test
         public async Task UpdateEmpleadoTest()
         {
             Empleado.IdEmpleado = Context.Empleado.OrderByDescending(x => x.IdEmpleado).First().IdEmpleado;
-            Empleado.Nombre = "Bismarck Franco";
+            Empleado.Nombre = "Bismarck Modificado";
             
             var Result = await Repository.Update(Empleado);
             Assert.AreEqual("El Empleado se actualizó correctamente.", Result);
