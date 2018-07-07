@@ -9,18 +9,18 @@ using SAIP_MED.DATA.Config;
 
 namespace SAIP_MED.DATA.Persistences
 {
-    public class EmpleadoRepository: IEmpleadoRepository
+    public class MedicoRepository: IMedicoRepository
     {
         AppDbContext Context;
-        public async Task<string> Create(Empleado empleado)
+        public async Task<string> Create(Medico medico)
         {
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    await Context.Empleado.AddAsync(empleado);
+                    await Context.Medico.AddAsync(medico);
                     await Context.SaveChangesAsync();
-                    return "El Empleado se guardó correctamente.";
+                    return "El Medico se guardó correctamente.";
                 }
                 catch (Exception ex)
                 {
@@ -31,7 +31,7 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Delete(int id)
         {
-            var delete = await GetEmpleadoById(id);
+            var delete = await GetMedicoById(id);
             using (Context = new AppDbContext())
             {
                 try
@@ -39,7 +39,7 @@ namespace SAIP_MED.DATA.Persistences
                     delete.Estado = 0;
                     Context.Entry(delete).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
-                    return "El Empleado se eliminó correctamente.";
+                    return "El Medico se eliminó correctamente.";
 
                 }
                 catch (Exception ex)
@@ -49,31 +49,31 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<Empleado> GetEmpleadoById(int id)
+        public async Task<Medico> GetMedicoById(int id)
         {
             using (Context = new AppDbContext())
             {
-                return await Context.Empleado.Where(x => x.IdEmpleado == id).FirstOrDefaultAsync();
+                return await Context.Medico.Where(x => x.IdMedico == id).FirstOrDefaultAsync();
             }
         }
 
-        public async Task<IEnumerable> GetEmpleados()
+        public async Task<IEnumerable> GetMedicos()
         {
             using (Context = new AppDbContext())
             {
-                return await Context.Empleado.Where(x => x.Estado == 1).ToListAsync();
+                return await Context.Medico.Where(x => x.Estado == 1).ToListAsync();
             }
         }
 
-        public async Task<string> Update(Empleado empleado)
+        public async Task<string> Update(Medico medico)
         {
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(empleado).State = EntityState.Modified;
+                    Context.Entry(medico).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
-                    return "El Empleado se actualizó correctamente.";
+                    return "El Medico se actualizó correctamente.";
 
                 }
                 catch (Exception ex)

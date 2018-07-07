@@ -3,12 +3,13 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SAIP_MED.CORE.Interfaces;
 using SAIP_MED.CORE.Models;
 using SAIP_MED.DATA.Config;
 
 namespace SAIP_MED.DATA.Persistences
 {
-    public class SeguroRepository
+    public class SeguroRepository: ISeguroRepository
     {
         AppDbContext Context;
         public async Task<string> Create(Seguro seguro)
