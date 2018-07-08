@@ -28,6 +28,19 @@ namespace SAIP_MED.DATA.Persistences
                 }
             }
         }
+        public async Task<string> Create(AppDbContext context,Contacto contacto)
+        {
+            try
+            {
+                await context.SaveChangesAsync();
+                await context.Contacto.AddAsync(contacto);
+                return "El Contacto se guardó correctamente.";
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.ToString();
+            }
+        }
 
         public async Task<string> Delete(int id)
         {
