@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +23,13 @@ namespace SAIP_MED.DATA.Persistences
                 {
                     await Context.Paciente.AddAsync(paciente);
                     await Context.SaveChangesAsync();
-                    var LastIdPaciente = Context.Paciente.OrderByDescending(x => x.IdPaciente).First().IdPaciente;
+                    var LastIdPaciente = Context.Paciente.OrderByDescending(x => x.IdPaciente).First().IdPaciente ;
                     foreach (var contacto in paciente.Contactos)
                     {
                         contacto.IdPaciente = LastIdPaciente;
                         await Contacto.Create(Context,contacto);
                     }
+
                     Trans.Result.Commit();
                     Trans.Dispose();
                     return "El Paciente se guardó correctamente.";
@@ -70,7 +71,7 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<IEnumerable> GetPacientes()
+        public async Task<IEnumerable<Paciente>> GetPacientes()
         {
             using (Context = new AppDbContext())
             {
@@ -80,11 +81,23 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Update(Paciente paciente)
         {
+            var update = await GetPacienteById(paciente.IdPaciente);
+            update.Nombre = paciente.Nombre;
+            update.Apellidos = paciente.Apellidos;
+            update.Telefono = paciente.Telefono;
+            update.Direccion = paciente.Direccion;
+            update.Email = paciente.Email;
+            update.IdDocumento = paciente.IdDocumento;
+            update.NroDocumento = paciente.NroDocumento;
+            update.Sexo = paciente.Sexo;
+            update.FechaNacimiento = paciente.FechaNacimiento;
+            update.IdSeguro = paciente.IdSeguro;
+
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(paciente).State = EntityState.Modified;
+                    Context.Entry(update).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Paciente se actualizó correctamente.";
 

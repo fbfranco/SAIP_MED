@@ -54,9 +54,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetEspecialidadsTest() 
+        public void GetEspecialidadsTest() 
         { 
-            var Result = await Repository.GetEspecialidades().ToAsyncEnumerable().Count();
+            var Result = Repository.GetEspecialidades().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         

@@ -49,7 +49,11 @@ namespace SAIP_MED.TEST.Test
         {
             Contacto.IdContacto = Context.Contacto.OrderByDescending(x => x.IdContacto).First().IdContacto;
             Contacto.Nombre = "Bismarck Modificado";
-            
+            Contacto.IdDocumento = 1;
+            Contacto.NroDocumento = "5323182 SC";
+            Contacto.IdPaciente = 1;
+            Contacto.Relacion = "Hermano";
+
             var Result = await Repository.Update(Contacto);
             Assert.AreEqual("El Contacto se actualizó correctamente.", Result);
         }
@@ -63,9 +67,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetContactosTest() 
+        public void GetContactosTest() 
         { 
-            var Result = await Repository.GetContactos().ToAsyncEnumerable().Count();
+            var Result = Repository.GetContactos().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         

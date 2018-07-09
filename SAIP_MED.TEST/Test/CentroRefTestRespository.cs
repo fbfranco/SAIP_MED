@@ -40,7 +40,7 @@ namespace SAIP_MED.TEST.Test
         public async Task UpdateCentroTest()
         {
             CentroRef.IdCentroRef = Context.CentroRef.OrderByDescending(x => x.IdCentroRef).First().IdCentroRef;
-            CentroRef.NombreCentro = "Hospital Hernandez Vera Modificado";
+            CentroRef.NombreCentro = "Hospital Hernandez Modificado";
             var Result = await Repository.Update(CentroRef);
             Assert.AreEqual("El Centro se actualizó correctamente.", Result);
         }
@@ -54,9 +54,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetCentrosTest() 
+        public void GetCentrosTest() 
         { 
-            var Result = await Repository.GetCentros().ToAsyncEnumerable().Count();
+            var Result = Repository.GetCentros().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         

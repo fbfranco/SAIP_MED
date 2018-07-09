@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +57,7 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<IEnumerable> GetMedicos()
+        public async Task<IEnumerable<Medico>> GetMedicos()
         {
             using (Context = new AppDbContext())
             {
@@ -67,11 +67,21 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Update(Medico medico)
         {
+            var update = await GetMedicoById(medico.IdMedico);
+            update.Nombre = medico.Nombre;
+            update.Apellidos = medico.Apellidos;
+            update.Telefono = medico.Telefono;
+            update.Direccion = medico.Direccion;
+            update.Email = medico.Email;
+            update.IdDocumento = medico.IdDocumento;
+            update.NroDocumento = medico.NroDocumento;
+            update.IdEspecialidad = medico.IdEspecialidad;
+
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(medico).State = EntityState.Modified;
+                    Context.Entry(update).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Medico se actualizó correctamente.";
 

@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +57,7 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<IEnumerable> GetEspecialidades()
+        public async Task<IEnumerable<Especialidad>> GetEspecialidades()
         {
             using (Context = new AppDbContext())
             {
@@ -67,11 +67,14 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Update(Especialidad especialidad)
         {
+            var update = await GetEspecialidadById(especialidad.IdEspecialidad);
+            update.NombreEspecialidad = especialidad.NombreEspecialidad;
+
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(especialidad).State = EntityState.Modified;
+                    Context.Entry(update).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "La Especialidad se actualizó correctamente.";
 

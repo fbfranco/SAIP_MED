@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SAIP_MED.CORE.Models;
 
@@ -10,7 +9,7 @@ namespace SAIP_MED.CORE.Interfaces
         Task<string> Create(Documento document);
         Task<string> Update(Documento document);
         Task<string> Delete(int id);
-        Task<IEnumerable>  GetDocuments();
+        Task<IEnumerable<Documento>> GetDocuments();
         Task<Documento> GetDocumentById(int id);
     }
 }

@@ -48,7 +48,10 @@ namespace SAIP_MED.TEST.Test
         {
             Empleado.IdEmpleado = Context.Empleado.OrderByDescending(x => x.IdEmpleado).First().IdEmpleado;
             Empleado.Nombre = "Bismarck Modificado";
-            
+            Empleado.Cargo = "Developer";
+            Empleado.IdDocumento = 1;
+            Empleado.NroDocumento = "5323182 SC";
+
             var Result = await Repository.Update(Empleado);
             Assert.AreEqual("El Empleado se actualizó correctamente.", Result);
         }
@@ -62,9 +65,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetEmpleadosTest() 
+        public void GetEmpleadosTest() 
         { 
-            var Result = await Repository.GetEmpleados().ToAsyncEnumerable().Count();
+            var Result = Repository.GetEmpleados().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         

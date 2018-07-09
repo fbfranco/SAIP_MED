@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +39,7 @@ namespace SAIP_MED.DATA.Persistences
                     delete.Estado = 0;
                     Context.Entry(delete).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
-                    return "El Centro se guardó correctamente.";
+                    return "El Centro se eliminó correctamente.";
                 }
                 catch (Exception ex)
                 {
@@ -56,7 +56,7 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<IEnumerable> GetCentros()
+        public async Task<IEnumerable<CentroRef>> GetCentros()
         {
             using (Context = new AppDbContext())
             {
@@ -66,11 +66,15 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Update(CentroRef centro)
         {
+            var update = await GetCentroById(centro.IdCentroRef);
+            update.NombreCentro = centro.NombreCentro;
+            update.Telefono = centro.Telefono;
+            
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(centro).State = EntityState.Modified;
+                    Context.Entry(update).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Centro se actualizó correctamente.";
                 }

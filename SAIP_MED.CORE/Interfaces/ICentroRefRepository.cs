@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Threading.Tasks;
 using SAIP_MED.CORE.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SAIP_MED.CORE.Interfaces
 {
@@ -9,7 +9,7 @@ namespace SAIP_MED.CORE.Interfaces
          Task<string> Create(CentroRef centro);
          Task<string> Update(CentroRef centro);
          Task<string> Delete(int id);
-         Task<IEnumerable> GetCentros();
+         Task<IEnumerable<CentroRef>> GetCentros();
          Task<CentroRef> GetCentroById(int id);
     }
 }

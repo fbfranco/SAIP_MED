@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SAIP_MED.CORE.Models;
 
@@ -9,7 +9,7 @@ namespace SAIP_MED.CORE.Interfaces
         Task<string> Create(Medico medico);
         Task<string> Update(Medico medico);
         Task<string> Delete(int id);
-        Task<IEnumerable>  GetMedicos();
+        Task<IEnumerable<Medico>>  GetMedicos();
         Task<Medico> GetMedicoById(int id);
     }
 }

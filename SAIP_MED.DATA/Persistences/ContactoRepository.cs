@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +32,9 @@ namespace SAIP_MED.DATA.Persistences
         {
             try
             {
-                await context.SaveChangesAsync();
+                contacto.IdContacto = -2;
                 await context.Contacto.AddAsync(contacto);
+                await context.SaveChangesAsync();
                 return "El Contacto se guardó correctamente.";
             }
             catch (Exception ex)
@@ -69,7 +70,7 @@ namespace SAIP_MED.DATA.Persistences
             }
         }
 
-        public async Task<IEnumerable> GetContactos()
+        public async Task<IEnumerable<Contacto>> GetContactos()
         {
             using (Context = new AppDbContext())
             {
@@ -79,11 +80,21 @@ namespace SAIP_MED.DATA.Persistences
 
         public async Task<string> Update(Contacto contacto)
         {
+            var update = await GetContactoById(contacto.IdContacto);
+            update.Nombre = contacto.Nombre;
+            update.Apellidos = contacto.Apellidos;
+            update.Telefono = contacto.Telefono;
+            update.Direccion = contacto.Direccion;
+            update.Email = contacto.Email;
+            update.IdDocumento = contacto.IdDocumento;
+            update.NroDocumento = contacto.NroDocumento;
+            update.Relacion = contacto.Relacion;
+            
             using (Context = new AppDbContext())
             {
                 try
                 {
-                    Context.Entry(contacto).State = EntityState.Modified;
+                    Context.Entry(update).State = EntityState.Modified;
                     await Context.SaveChangesAsync();
                     return "El Contacto se actualizó correctamente.";
 

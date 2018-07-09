@@ -48,7 +48,10 @@ namespace SAIP_MED.TEST.Test
         {
             Medico.IdMedico = Context.Medico.OrderByDescending(x => x.IdMedico).First().IdMedico;
             Medico.Nombre = "Bismarck Modificado";
-            
+            Medico.IdDocumento = 1;
+            Medico.NroDocumento = "5323182 SC";
+            Medico.IdEspecialidad = 1;
+
             var Result = await Repository.Update(Medico);
             Assert.AreEqual("El Medico se actualizó correctamente.", Result);
         }
@@ -62,9 +65,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetMedicosTest() 
+        public void GetMedicosTest() 
         { 
-            var Result = await Repository.GetMedicos().ToAsyncEnumerable().Count();
+            var Result = Repository.GetMedicos().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         

@@ -46,7 +46,9 @@ namespace SAIP_MED.TEST.Test
         {
             Seguro.IdSeguro = Context.Seguro.OrderByDescending(x => x.IdSeguro).First().IdSeguro;
             Seguro.Nombre = "Nacional Vida Modificado";
-            
+            Seguro.IdDocumento = 1;
+            Seguro.NroDocumento = "5323182-BCK SC";
+
             var Result = await Repository.Update(Seguro);
             Assert.AreEqual("El Seguro se actualizó correctamente.", Result);
         }
@@ -60,9 +62,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetSegurosTest() 
-        { 
-            var Result = await Repository.GetSeguros().ToAsyncEnumerable().Count();
+        public void GetSegurosTest() 
+        {
+            var Result = Repository.GetSeguros().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         
@@ -70,7 +72,7 @@ namespace SAIP_MED.TEST.Test
         public async Task GetSeguroByIdTest() 
         { 
             Seguro.IdSeguro = Context.Seguro.OrderByDescending(x => x.IdSeguro).First().IdSeguro;
-            var Result = await Repository.GetSeguroById(Seguro.IdSeguro).ToAsyncEnumerable().Count();
+            var Result = await Repository.GetSeguroById(Seguro.IdSeguro).ToAsyncEnumerable<Seguro>().Count();
             Assert.IsTrue(Result == 1);
         }
     }

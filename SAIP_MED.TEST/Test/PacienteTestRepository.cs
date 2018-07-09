@@ -37,6 +37,7 @@ namespace SAIP_MED.TEST.Test
             var Contactos = new Collection<Contacto>();
             for (int i = 1; i <= 4; i++)
             {
+                Contacto = new Contacto();
                 Contacto.Nombre = "Nombre Contacto Nro. " + i;
                 Contacto.Apellidos = "Apellido Contacto Nro. " + i;
                 Contacto.IdDocumento = 1;
@@ -70,7 +71,12 @@ namespace SAIP_MED.TEST.Test
         {
             Paciente.IdPaciente = Context.Paciente.OrderByDescending(x => x.IdPaciente).First().IdPaciente;
             Paciente.Nombre = "Bismarck Modificado";
-            
+            Paciente.IdDocumento = 1;
+            Paciente.NroDocumento = "5323182 SC";
+            Paciente.Sexo = "Masculino";
+            Paciente.FechaNacimiento = new DateTime(1991, 08, 19);
+            Paciente.IdSeguro = 1;
+
             var Result = await Repository.Update(Paciente);
             Assert.AreEqual("El Paciente se actualizó correctamente.", Result);
         }
@@ -84,9 +90,9 @@ namespace SAIP_MED.TEST.Test
         }
 
         [TestMethod]
-        public async Task GetPacientesTest() 
+        public void GetPacientesTest() 
         { 
-            var Result = await Repository.GetPacientes().ToAsyncEnumerable().Count();
+            var Result = Repository.GetPacientes().Result.Count();
             Assert.IsTrue(Result > 0);
         }
         
